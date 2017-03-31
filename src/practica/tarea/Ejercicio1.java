@@ -1,3 +1,4 @@
+package practica.tarea;
 import java.util.Scanner;
 
 public class Ejercicio1 {
