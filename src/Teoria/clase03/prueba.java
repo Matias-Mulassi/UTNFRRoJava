@@ -1,7 +1,6 @@
 
 
 package Teoria.clase03;
-import Teoria.clase04.*;
 public class prueba {
 
 public static void main(String[] args){
@@ -11,8 +10,6 @@ Alien et;
 et = new Alien("Miguelete");
 
 et.setNombre("Luzbelito");
-
-Teoria.clase04.Data.guardar();
 
 //armo el Planeta//
 
