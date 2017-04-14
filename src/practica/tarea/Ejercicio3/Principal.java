@@ -27,7 +27,7 @@ public class Principal {
 			
 			case "A" : {Administrativo adm= new Administrativo();
 			cargaDatosAdministrativo(adm);
-			emps.add(i,adm); i++; break;}
+			emps.add(adm); i++; break;}
 			
 			case "V": {	Vendedor ven= new Vendedor();
 				cargaDatosVendedor(ven);
