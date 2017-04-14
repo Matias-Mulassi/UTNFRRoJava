@@ -30,7 +30,7 @@ astro.setDenominacion("SABU");
 et.setOrigen(astro);
 
 
-
+//Comentario//
 
 //armo la especie//
 Especie bichoTipo;
