@@ -8,6 +8,9 @@ private Especie queEspecie;
 private Planeta origen;
 
 
+public Alien(String nombre) {
+	this.nombre = nombre;
+}
 public int getIdAlien() {
 	return idAlien;
 }
