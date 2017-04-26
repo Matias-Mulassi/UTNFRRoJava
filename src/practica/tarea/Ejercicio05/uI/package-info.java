@@ -5,4 +5,4 @@
  * @author Usuario
  *
  */
-package practica.tarea.Ejercicio05.UI;
+package practica.tarea.Ejercicio05.uI;

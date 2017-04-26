@@ -1,4 +1,4 @@
-package practica.tarea.Ejercicio05.UI;
+package practica.tarea.Ejercicio05.controlers;
 
 import java.util.Scanner;
 
