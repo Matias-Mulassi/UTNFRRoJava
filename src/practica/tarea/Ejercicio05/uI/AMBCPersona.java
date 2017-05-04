@@ -2,7 +2,7 @@ package practica.tarea.Ejercicio05.uI;
 
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -22,7 +22,7 @@ import java.awt.event.MouseEvent;
 import practica.tarea.Ejercicio05.logic.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-public class AMBCPersona extends JFrame {
+public class AMBCPersona extends JInternalFrame {
 
 	private ControladorABMCPersonas ctrl= new ControladorABMCPersonas();
 	
@@ -34,9 +34,9 @@ public class AMBCPersona extends JFrame {
 	private JCheckBox chckbxHabilitado;
 
 	/**
-	 * Launch the application.
+	 * Launch the applicatioN.
 	 */
-	public static void main(String[] args) {
+	public static void Oldmain(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -53,8 +53,9 @@ public class AMBCPersona extends JFrame {
 	 * Create the frame.
 	 */
 	public AMBCPersona() {
+		setClosable(true);
 		setBackground(Color.CYAN);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JInternalFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 386, 339);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.CYAN);
