@@ -55,7 +55,7 @@ public class AMBCPersona extends JFrame {
 	public AMBCPersona() {
 		setBackground(Color.CYAN);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 575, 450);
+		setBounds(100, 100, 386, 339);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.CYAN);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -212,20 +212,25 @@ public class AMBCPersona extends JFrame {
 					}
 	
 	protected void borrarClick() {
-		
 		Persona p= new Persona();
 		p.setDni(this.txtDni.getText());
 		p= ctrl.devuelvePersona(p);
 		if (p==null) {
 			JOptionPane.showMessageDialog(null,"No existe una persona con ese Dni");}
-		
+				
 		else {	
 			ctrl.borrarPersona(p);
-			JOptionPane.showMessageDialog(null, " Persona Borrada : " +"\n" + "Nombre: "+ p.getNombre() + "\n" + "Apellido" + p.getApellido() +"\n" + "Habilitado:" + p.isHabilitado() );
-		}
+			if(p.isHabilitado()){
+			JOptionPane.showMessageDialog(null, " Persona Borrada : " +"\n" + "Nombre: "+ p.getNombre() + "\n" + "Apellido" + p.getApellido() +"\n" + "Habilitado: Si"  );
+			}
+		
+			else {
+				JOptionPane.showMessageDialog(null, " Persona Borrada : " +"\n" + "Nombre: "+ p.getNombre() + "\n" + "Apellido" + p.getApellido() +"\n" + "Habilitado: No"  );
+			}
+				}
 		
 	
-			}
+					}
 				protected void modificarClick(){
 					Persona p = new Persona();
 					p = mapearDeForm();
@@ -253,7 +258,7 @@ public class AMBCPersona extends JFrame {
 	
 	
 	
-	private void mapearAForm(Persona p) {
+	private void mapearAForm(Persona p) {   //Este metodo pone los datos en el formulario//
 		
 		this.txtDni.setText(p.getDni());
 		this.txtNombre.setText(p.getNombre());
