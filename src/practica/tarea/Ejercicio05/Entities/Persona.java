@@ -11,7 +11,7 @@ public class Persona {
 	
 	public boolean equals(Object obj){
 	    if(obj instanceof Persona){
-	    	return (((Persona)obj).getDni().equals(this.getDni()));
+	    	return (((Persona)obj).getDni().equals(this.getDni())); //JAVA busco unicamente por direccion de memoria, por eso la redefinicion//
 	    }
 	    return false;
 	}

@@ -1,6 +1,5 @@
 package practica.tarea.Ejercicio05.uI;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -12,6 +11,7 @@ import practica.tarea.Ejercicio05.Entities.Persona;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
@@ -20,6 +20,8 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import practica.tarea.Ejercicio05.logic.*;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 public class AMBCPersona extends JFrame {
 
 	private ControladorABMCPersonas ctrl= new ControladorABMCPersonas();
@@ -95,8 +97,26 @@ public class AMBCPersona extends JFrame {
 		});
 		
 		JButton btnBorrar = new JButton("Borrar");
+		btnBorrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			borrarClick();
+			
+			}
+		});
+		
+		
 		
 		JButton btnModificar = new JButton("Modificar");
+		btnModificar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			modificarClick();
+			}
+		});
+		
+		
+		
+		
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -163,19 +183,73 @@ public class AMBCPersona extends JFrame {
 		Persona p= new Persona();
 		p.setDni(this.txtDni.getText()); //Aqui pasamos el control grafico//
 		p= ctrl.devuelvePersona(p);
-	
+		if (p==null) 
+			JOptionPane.showMessageDialog(null,"No existe una persona con ese Dni");
 		
+		else {
+			if (p.isHabilitado()){
+			JOptionPane.showMessageDialog(null, "Nombre: "+ p.getNombre() + "\n" + "Apellido" + p.getApellido() +"\n" + "Habilitado: Si" );
+			}
+			else {JOptionPane.showMessageDialog(null, "Nombre: "+ p.getNombre() + "\n" + "Apellido" + p.getApellido() +"\n" + "Habilitado: No" );}
+			
+			mapearAForm(p);}
+	
 	}
 
 	
 	protected void agregarClick(){
+		Persona p = new Persona();
+		p.setDni(this.txtDni.getText());
+		if (ctrl.existePersona(p)){
+			JOptionPane.showMessageDialog(null,"Ya existe una persona con ese Dni");
+		return;
+		
+			}
+		
 		ctrl.crearPersona(this.mapearDeForm());
+		JOptionPane.showMessageDialog(null,"Persona agregada Exitosamente");
 		
+					}
+	
+	protected void borrarClick() {
 		
+		Persona p= new Persona();
+		p.setDni(this.txtDni.getText());
+		p= ctrl.devuelvePersona(p);
+		if (p==null) {
+			JOptionPane.showMessageDialog(null,"No existe una persona con ese Dni");}
 		
+		else {	
+			ctrl.borrarPersona(p);
+			JOptionPane.showMessageDialog(null, " Persona Borrada : " +"\n" + "Nombre: "+ p.getNombre() + "\n" + "Apellido" + p.getApellido() +"\n" + "Habilitado:" + p.isHabilitado() );
+		}
 		
-		
-	}
+	
+			}
+				protected void modificarClick(){
+					Persona p = new Persona();
+					p = mapearDeForm();
+					if (!ctrl.existePersona(p)){
+						JOptionPane.showMessageDialog(null,"No existe una persona con ese Dni");
+						return;	
+					}
+					ctrl.actualizarPersona(p);
+					mapearAForm(p);
+					if (p.isHabilitado()){
+					JOptionPane.showMessageDialog(null,"Persona Modificada Con exito" +"\n"+ "Nombre :"+ p.getNombre() + "\n" + "Apellido:  " + p.getApellido() + "\n" + "Dni:" +p.getDni() +"\n" + "Habilitado: Si" );
+					return;
+					}
+					
+					JOptionPane.showMessageDialog(null,"Persona Modificada Con exito" +"\n"+ "Nombre :"+ p.getNombre() + "\n" + "Apellido:  " + p.getApellido() + "\n" + "Dni:" +p.getDni() + "Habilitado: No");
+							
+				
+				
+				}
+					
+					
+					
+					
+	
 	
 	
 	
@@ -199,7 +273,8 @@ public class AMBCPersona extends JFrame {
 		p.setNombre(this.txtNombre.getText());
 		p.setApellido(this.txtApellido.getText());
 		p.setApellido(this.txtApellido.getText());
-		p.setHabilitado(this.chckbxHabilitado.getText());
+		p.setHabilitado(this.chckbxHabilitado.isSelected());
+	
 		return p;
 		
 		

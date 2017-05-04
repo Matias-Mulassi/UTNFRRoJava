@@ -96,7 +96,7 @@ public class ControladorABMCPersona {
 	public static void bajaPersona(long dniB) {
 		
 	for(Persona p : pers) {
-		if (p.getDni()==dniB) {
+		if (p.getDni()==dni) {
 			
 			pers.remove(p);
 			System.out.println("Se removio a una persona");
