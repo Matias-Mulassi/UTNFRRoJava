@@ -186,7 +186,7 @@ public class AMBCPersona extends JInternalFrame {
 		p.setDni(this.txtDni.getText()); //Aqui pasamos el control grafico//
 		p= ctrl.devuelvePersona(p);
 		if (p==null) 
-			JOptionPane.showMessageDialog(null,"No existe una persona con ese Dni");
+			dniNoExiste();
 		
 		else {
 			if (p.isHabilitado()){
@@ -217,37 +217,14 @@ public class AMBCPersona extends JInternalFrame {
 		Persona p= new Persona();
 		p.setDni(this.txtDni.getText());
 		p= ctrl.devuelvePersona(p);
-		if (p==null) {
-			JOptionPane.showMessageDialog(null,"No existe una persona con ese Dni");}
+		mostrarBorrada(p);
+		
 				
-		else {	
-			ctrl.borrarPersona(p);
-			if(p.isHabilitado()){
-			JOptionPane.showMessageDialog(null, " Persona Borrada : " +"\n" + "Nombre: "+ p.getNombre() + "\n" + "Apellido" + p.getApellido() +"\n" + "Habilitado: Si"  );
-			}
-		
-			else {
-				JOptionPane.showMessageDialog(null, " Persona Borrada : " +"\n" + "Nombre: "+ p.getNombre() + "\n" + "Apellido" + p.getApellido() +"\n" + "Habilitado: No"  );
-			}
 				}
-		
-	
-					}
 				protected void modificarClick(){
 					Persona p = new Persona();
 					p = mapearDeForm();
-					if (!ctrl.existePersona(p)){
-						JOptionPane.showMessageDialog(null,"No existe una persona con ese Dni");
-						return;	
-					}
-					ctrl.actualizarPersona(p);
-					mapearAForm(p);
-					if (p.isHabilitado()){
-					JOptionPane.showMessageDialog(null,"Persona Modificada Con exito" +"\n"+ "Nombre :"+ p.getNombre() + "\n" + "Apellido:  " + p.getApellido() + "\n" + "Dni:" +p.getDni() +"\n" + "Habilitado: Si" );
-					return;
-					}
-					
-					JOptionPane.showMessageDialog(null,"Persona Modificada Con exito" +"\n"+ "Nombre :"+ p.getNombre() + "\n" + "Apellido:  " + p.getApellido() + "\n" + "Dni:" +p.getDni() + "Habilitado: No");
+					mostrarModificada(p);
 							
 				
 				
@@ -291,4 +268,57 @@ public class AMBCPersona extends JInternalFrame {
 		
 		
 	}	
+
+	
+	private void dniNoExiste() {
+		
+		JOptionPane.showMessageDialog(null,"No existe una persona con ese Dni");
+		
+	}
+	
+	
+
+	private void mostrarModificada(Persona p) {
+		
+		if (!ctrl.existePersona(p)){
+			dniNoExiste();
+			return;	
+		}
+		ctrl.actualizarPersona(p);
+		mapearAForm(p);
+		if (p.isHabilitado()){
+		JOptionPane.showMessageDialog(null,"Persona Modificada Con exito" +"\n"+ "Nombre :"+ p.getNombre() + "\n" + "Apellido:  " + p.getApellido() + "\n" + "Dni:" +p.getDni() +"\n" + "Habilitado: Si" );
+		return;
+		}
+		
+		JOptionPane.showMessageDialog(null,"Persona Modificada Con exito" +"\n"+ "Nombre :"+ p.getNombre() + "\n" + "Apellido:  " + p.getApellido() + "\n" + "Dni: " +p.getDni() + "Habilitado: No");
+	}	
+	private void mostrarBorrada(Persona p) {
+		
+		if (p==null) {
+			dniNoExiste();}
+				
+		else {	
+			ctrl.borrarPersona(p);
+			if(p.isHabilitado()){
+			JOptionPane.showMessageDialog(null, " Persona Borrada : " +"\n" + "Nombre: "+ p.getNombre() + "\n" + "Apellido" + p.getApellido() +"\n" + "Habilitado: Si"  );
+			}
+		
+			else {
+				JOptionPane.showMessageDialog(null, " Persona Borrada : " +"\n" + "Nombre: "+ p.getNombre() + "\n" + "Apellido" + p.getApellido() +"\n" + "Habilitado: No"  );
+			}
+				}
+		
+	}
+	
+	
+	
+	
+
+
+
 }
+
+
+
+

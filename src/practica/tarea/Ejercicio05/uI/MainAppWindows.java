@@ -15,7 +15,7 @@ import java.awt.event.ActionEvent;
 
 public class MainAppWindows {
 //Comentario//
-	private JFrame frame;
+	private JFrame frmAbmcPersonas;
 	private JMenuItem mntmAbmc;
 	private JDesktopPane desktopPane;
 
@@ -27,7 +27,7 @@ public class MainAppWindows {
 			public void run() {
 				try {
 					MainAppWindows window = new MainAppWindows();
-					window.frame.setVisible(true);
+					window.frmAbmcPersonas.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -46,14 +46,15 @@ public class MainAppWindows {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 641, 428);
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frame.getContentPane().setLayout(new BorderLayout(0, 0));
+		frmAbmcPersonas = new JFrame();
+		frmAbmcPersonas.setTitle("ABM Java");
+		frmAbmcPersonas.setBounds(100, 100, 641, 428);
+		frmAbmcPersonas.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frmAbmcPersonas.getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		desktopPane = new JDesktopPane();
 		desktopPane.setBackground(Color.WHITE);
-		frame.getContentPane().add(desktopPane, BorderLayout.CENTER);
+		frmAbmcPersonas.getContentPane().add(desktopPane, BorderLayout.CENTER);
 		
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBounds(0, 0, 97, 21);
