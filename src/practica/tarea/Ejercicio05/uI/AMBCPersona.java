@@ -22,6 +22,7 @@ import java.awt.event.MouseEvent;
 import practica.tarea.Ejercicio05.logic.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JFrame;
 public class AMBCPersona extends JInternalFrame {
 
 	private ControladorABMCPersonas ctrl= new ControladorABMCPersonas();
@@ -55,7 +56,7 @@ public class AMBCPersona extends JInternalFrame {
 	public AMBCPersona() {
 		setClosable(true);
 		setBackground(Color.CYAN);
-		setDefaultCloseOperation(JInternalFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 386, 339);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.CYAN);
