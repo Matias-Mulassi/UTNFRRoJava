@@ -25,7 +25,7 @@ public Alien(String nombre) {
 //	this.queEspecie = new Especie();
 //	this.queEspecie.setNombreEspecie("Hombre");
 	
-	this(nombre,new Especie(),new Planeta());
+	this(nombre,new Especie(),new Planeta()); //Consultar profe//
 	
 	
 }
@@ -70,7 +70,7 @@ public String toString(){
 
 
 public int compare(Object obj2) {
-	return (0-(this.origen.getDenominacion()).compareTo(((Alien)obj2).getOrigen().getDenominacion()));
+	return (0-(this.nombre).compareTo(((Alien)obj2).getNombre()));
 	
 	
 	

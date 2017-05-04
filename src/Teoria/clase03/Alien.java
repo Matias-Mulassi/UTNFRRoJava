@@ -60,7 +60,7 @@ public void escupirBaba(int minutos){
 }
 
 public String toString(){
-	return getIdAlien() + "\n" + 
+	return  getIdAlien() + "\n" + 
 			getNombre() + "\n" +
 			getOrigen().getDenominacion()+"\n" +
 			getQueEspecie().getNombreEspecie()+ "\n";

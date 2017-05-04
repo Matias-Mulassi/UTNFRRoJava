@@ -9,9 +9,6 @@ public static void main(String[] args){
 Alien et;
 et = new Alien("Miguelete");
 
-et.setNombre("Luzbelito");
-
-
 
 
 //et.setNombre("Luzbelito");
@@ -53,6 +50,7 @@ astro2= new Planeta();
 astro2.setDenominacion("MAJU");
 
 et2.setOrigen(astro2);
+et2.getQueEspecie().setNombreEspecie("Loco");
 
 
 
