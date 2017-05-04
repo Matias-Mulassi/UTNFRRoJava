@@ -19,10 +19,10 @@ import javax.swing.JCheckBox;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
+import practica.tarea.Ejercicio05.logic.*;
 public class AMBCPersona extends JFrame {
 
-	private CtrlABMPersona ctrl= new CtrlABMPersona();
+	private ControladorABMCPersonas ctrl= new ControladorABMCPersonas();
 	
 	
 	private JPanel contentPane;
@@ -51,7 +51,7 @@ public class AMBCPersona extends JFrame {
 	 * Create the frame.
 	 */
 	public AMBCPersona() {
-		setBackground(Color.WHITE);
+		setBackground(Color.CYAN);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 575, 450);
 		contentPane = new JPanel();
@@ -162,14 +162,14 @@ public class AMBCPersona extends JFrame {
 	protected void buscarClick() {
 		Persona p= new Persona();
 		p.setDni(this.txtDni.getText()); //Aqui pasamos el control grafico//
-		p= ctrl.getByDni(p);
+		p= ctrl.devuelvePersona(p);
 	
 		
 	}
 
 	
 	protected void agregarClick(){
-		ctrl.add(this.mapearDeForm());
+		ctrl.crearPersona(this.mapearDeForm());
 		
 		
 		
@@ -184,7 +184,8 @@ public class AMBCPersona extends JFrame {
 		this.txtDni.setText(p.getDni());
 		this.txtNombre.setText(p.getNombre());
 		this.txtApellido.setText(p.getApellido());
-		this.chkHabilitado.setSelected(p.isHabilitado());
+		this.chckbxHabilitado.setSelected(p.isHabilitado());
+		
 		
 		
 		
@@ -197,8 +198,9 @@ public class AMBCPersona extends JFrame {
 		p.setDni(this.txtDni.getText());
 		p.setNombre(this.txtNombre.getText());
 		p.setApellido(this.txtApellido.getText());
+		p.setApellido(this.txtApellido.getText());
 		p.setHabilitado(this.chckbxHabilitado.getText());
-		
+		return p;
 		
 		
 		

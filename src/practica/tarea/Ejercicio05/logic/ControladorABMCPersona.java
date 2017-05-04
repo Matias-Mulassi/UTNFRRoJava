@@ -1,4 +1,4 @@
-package practica.tarea.Ejercicio05.controlers;
+package practica.tarea.Ejercicio05.logic;
 
 import java.util.Scanner;
 
