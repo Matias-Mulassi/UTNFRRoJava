@@ -5,7 +5,7 @@ public class Persona {
 	private String nombre;
 	private String apellido;
 	private boolean habilitado;
-	private long dni;
+	private String dni;
 	public String getNombre() {
 		return nombre;
 	}
@@ -27,14 +27,14 @@ public class Persona {
 	}
 	
 	
-	public long getDni() {
+	public String getDni() {
 		return dni;
 	}
-	public void setDni(long dni) {
+	public void setDni(String dni) {
 		this.dni = dni;
 	}
 	
-	public Persona(String nombre, String apellido,long dni, boolean habilitado) {
+	public Persona(String nombre, String apellido,String dni, boolean habilitado) {
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.habilitado = habilitado;
