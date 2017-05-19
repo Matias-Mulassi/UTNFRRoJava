@@ -43,7 +43,7 @@ public class ControladorABMCPersonas {
 		pers.remove(index);	
 	}
 	
-	
+	// Deberian haber comentarios aca
 	
 	
 	
