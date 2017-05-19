@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class ControladorABMCPersonas {
 	
 	private ArrayList<Persona> pers;
-	
+	//Este metodo es inutil
 	public ControladorABMCPersonas(){
 		
 		pers = new ArrayList<>();
