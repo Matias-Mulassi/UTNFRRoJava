@@ -4,7 +4,7 @@ import practica.tarea.Ejercicio05.Entities.Persona;
 import practica.tarea.Ejercicio05.logic.*;
 
 import java.util.Scanner;
-
+//
 
 public class ABMCPersona {
 	

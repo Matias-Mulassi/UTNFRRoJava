@@ -2,7 +2,7 @@ package practica.tarea.Ejercicio05.logic;
 
 import practica.tarea.Ejercicio05.Entities.*;
 import java.util.ArrayList;
-
+//
 public class ControladorABMCPersonas {
 	
 	private ArrayList<Persona> pers;

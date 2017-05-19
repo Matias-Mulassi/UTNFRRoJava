@@ -7,7 +7,7 @@ public class Persona {
 	private String apellido;
 	private boolean habilitado;
 	private String dni;
-	
+	//
 	
 	public boolean equals(Object obj){
 	    if(obj instanceof Persona){

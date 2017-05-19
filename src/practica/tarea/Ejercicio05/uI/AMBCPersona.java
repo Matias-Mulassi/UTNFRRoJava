@@ -1,5 +1,5 @@
 package practica.tarea.Ejercicio05.uI;
-
+//
 import java.awt.EventQueue;
 
 import javax.swing.JInternalFrame;

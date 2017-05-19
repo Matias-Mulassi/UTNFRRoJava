@@ -11,7 +11,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
+//
 
 public class MainAppWindows {
 //Comentario//
@@ -55,6 +55,7 @@ public class MainAppWindows {
 		desktopPane = new JDesktopPane();
 		desktopPane.setBackground(Color.WHITE);
 		frmAbmcPersonas.getContentPane().add(desktopPane, BorderLayout.CENTER);
+		desktopPane.setLayout(null);
 		
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBounds(0, 0, 97, 21);
