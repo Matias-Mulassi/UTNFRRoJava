@@ -1,10 +1,11 @@
 package practica.tarea.Ejercicio05.logic;
-
+import  practica.tarea.Ejercicio05.data.*;
 import practica.tarea.Ejercicio05.Entities.*;
 import java.util.ArrayList;
 //
 public class ControladorABMCPersonas {
 	
+	private DataPersona dataPer;
 	private ArrayList<Persona> pers;
 	
 	public ControladorABMCPersonas(){
@@ -43,7 +44,10 @@ public class ControladorABMCPersonas {
 		pers.remove(index);	
 	}
 	
-	
+	public ArrayList<Persona> getAll() {
+		return dataPer.getAll();
+		
+	}
 	
 	
 	
