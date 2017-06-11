@@ -26,7 +26,7 @@ public Alien(String nombre) {
 	
 	this(nombre,new Especie(),new Planeta());
 	
-	
+	//
 }
 public int getIdAlien() {
 	return idAlien;

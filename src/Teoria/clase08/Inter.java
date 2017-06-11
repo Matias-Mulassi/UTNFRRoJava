@@ -96,6 +96,6 @@ public class Inter extends JFrame {
 		btnNewButton.setBounds(147, 136, 89, 36);
 		desktopPane.add(btnNewButton);
 		
-		
+	//	
 	}
 }

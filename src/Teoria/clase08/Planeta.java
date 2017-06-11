@@ -9,7 +9,7 @@ int idPlaneta;
 String denominacion;
 float distancia;
 
-
+//
 
 
 
