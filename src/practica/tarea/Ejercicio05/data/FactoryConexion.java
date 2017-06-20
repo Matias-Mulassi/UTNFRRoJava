@@ -33,7 +33,7 @@ public class FactoryConexion {
 	
 	public Connection getConn(){
 		try {
-			conn=  DriverManager.getConnection("jdbc:mysql://localhost:3306/java2017?user=java&password=java");
+			conn=  DriverManager.getConnection("jdbc:mysql://sql10.freemysqlhosting.net:3306/sql10181254?user=sql10181254&password=eZkGdZyJe8");
 		
 		} catch (SQLException e) {
 			

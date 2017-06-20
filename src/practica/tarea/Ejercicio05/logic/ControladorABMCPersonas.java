@@ -9,9 +9,10 @@ public class ControladorABMCPersonas {
 	private ArrayList<Persona> pers;
 	
 	public ControladorABMCPersonas(){
-		
-		pers = new ArrayList<>();
-		pers.add(new Persona("Matías", "Mulassi", "39787058", true));
+		dataPer= new DataPersona();
+		dataPer.getAll();
+//		pers = new ArrayList<>();
+//		pers.add(new Persona("Matías", "Mulassi", "39787058", true));
 	}
 	
 	public void crearPersona(Persona p){
@@ -44,10 +45,13 @@ public class ControladorABMCPersonas {
 		pers.remove(index);	
 	}
 	
-	public ArrayList<Persona> getAll() {
-		return dataPer.getAll();
-		
-	}
+
+	
+	
+	//	public ArrayList<Persona> getAll() {
+//		return dataPer.getAll();
+//		
+//	}
 	
 	
 	
