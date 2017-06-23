@@ -7,6 +7,7 @@ public class Persona {
 	private String apellido;
 	private boolean habilitado;
 	private String dni;
+	private int id;
 	//
 	
 	public boolean equals(Object obj){
@@ -16,6 +17,20 @@ public class Persona {
 	    return false;
 	}
 	
+		
+
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+
+
 	public String getNombre() {
 		return nombre;
 	}

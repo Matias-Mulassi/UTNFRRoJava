@@ -33,6 +33,7 @@ public class AMBCPersona extends JInternalFrame {
 	private JTextField txtNombre;
 	private JTextField txtApellido;
 	private JCheckBox chckbxHabilitado;
+	private JTextField textField;
 
 	/**
 	 * Launch the applicatioN.
@@ -115,6 +116,12 @@ public class AMBCPersona extends JInternalFrame {
 			}
 		});
 		
+		textField = new JTextField();
+		textField.setEditable(false);
+		textField.setColumns(10);
+		
+		JLabel lblId = new JLabel("Id");
+		
 		
 		
 		
@@ -123,35 +130,36 @@ public class AMBCPersona extends JInternalFrame {
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addContainerGap()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(lblApellido)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(txtApellido, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
-										.addGroup(gl_contentPane.createSequentialGroup()
-											.addComponent(lblDni)
-											.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-											.addComponent(txtDni, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-										.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-											.addComponent(lblNombre)
-											.addPreferredGap(ComponentPlacement.UNRELATED)
-											.addComponent(txtNombre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-									.addGap(33)
-									.addComponent(btnBuscar))))
-						.addComponent(chckbxHabilitado)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(12)
-							.addComponent(btnAgregar)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnBorrar)
+							.addComponent(lblApellido)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(btnModificar)))
-					.addContainerGap(294, Short.MAX_VALUE))
+							.addComponent(txtApellido, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+							.addComponent(lblId)
+							.addGap(18)
+							.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(lblDni)
+									.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(txtDni, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(lblNombre)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(txtNombre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+							.addGap(33)
+							.addComponent(btnBuscar))))
+				.addComponent(chckbxHabilitado)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(12)
+					.addComponent(btnAgregar)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnBorrar)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(btnModificar))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -168,7 +176,9 @@ public class AMBCPersona extends JInternalFrame {
 					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblApellido)
-						.addComponent(txtApellido, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(txtApellido, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblId))
 					.addGap(18)
 					.addComponent(chckbxHabilitado)
 					.addGap(28)
@@ -176,7 +186,7 @@ public class AMBCPersona extends JInternalFrame {
 						.addComponent(btnBorrar)
 						.addComponent(btnModificar)
 						.addComponent(btnAgregar))
-					.addContainerGap(207, Short.MAX_VALUE))
+					.addContainerGap(105, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
@@ -185,17 +195,11 @@ public class AMBCPersona extends JInternalFrame {
 		Persona p= new Persona();
 		p.setDni(this.txtDni.getText()); //Aqui pasamos el control grafico//
 		p= ctrl.devuelvePersona(p);
-		if (p==null) 
+		if (p==null) {
 			dniNoExiste();
-		
+		}
 		else {
-			if (p.isHabilitado()){
-			JOptionPane.showMessageDialog(null, "Nombre: "+ p.getNombre() + "\n" + "Apellido" + p.getApellido() +"\n" + "Habilitado: Si" );
-			}
-			else {JOptionPane.showMessageDialog(null, "Nombre: "+ p.getNombre() + "\n" + "Apellido" + p.getApellido() +"\n" + "Habilitado: No" );}
-			
 			mapearAForm(p);}
-	
 	}
 
 	
@@ -238,7 +242,9 @@ public class AMBCPersona extends JInternalFrame {
 	
 	
 	private void mapearAForm(Persona p) {   //Este metodo pone los datos en el formulario//
-		
+		if(!String.valueOf(p.getId()).isEmpty()) {
+			this.textField.setText(String.valueOf(p.getId()));
+		}
 		this.txtDni.setText(p.getDni());
 		this.txtNombre.setText(p.getNombre());
 		this.txtApellido.setText(p.getApellido());
@@ -247,12 +253,16 @@ public class AMBCPersona extends JInternalFrame {
 		
 		
 		
+		
+		
 	}
 
 	private Persona mapearDeForm ()
-	{
-		
+	{ 
 		Persona p= new Persona();
+		if(!this.textField.getText().isEmpty()) {
+			p.setId(Integer.parseInt(this.textField.getText()));
+		}
 		p.setDni(this.txtDni.getText());
 		p.setNombre(this.txtNombre.getText());
 		p.setApellido(this.txtApellido.getText());

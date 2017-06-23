@@ -12,13 +12,14 @@ public class ControladorABMCPersonas {
 		dataPer= new DataPersona();
 		
 	pers = new ArrayList<Persona>();
-	pers.addAll(dataPer.getAll());
+	//pers.addAll(dataPer.getAll());
 		pers.add(new Persona("Matías", "Mulassi", "39787058", true));
 	}
 	
 	public void crearPersona(Persona p){
-		dataPer.insertRow(p);
-		pers.add(p);
+		//dataPer.insertRow(p);
+		//pers.add(p);
+		dataPer.add(p);
 	}
 	
 	public boolean existePersona(Persona p){
@@ -27,12 +28,18 @@ public class ControladorABMCPersonas {
 	}
 	
 	public Persona devuelvePersona(Persona p){
-		for (Persona persona : pers) {
-			if (persona.equals(p)){
-				return persona;			
-			}
-		}
-		return null;
+			
+		return dataPer.getByDni(p);
+		
+		
+		
+		
+		//		for (Persona persona : pers) {
+//			if (persona.equals(p)){
+//				return persona;			
+//			}
+//		}
+//		return null;
 	}
 	
 	public void actualizarPersona(Persona p){
