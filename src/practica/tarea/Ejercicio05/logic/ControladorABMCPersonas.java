@@ -45,7 +45,10 @@ public class ControladorABMCPersonas {
 		pers.remove(index);	
 	}
 	
-
+public Persona getByDni(Persona p)  {
+	return dataPer.getByDni(p);
+	
+}
 	
 	
 	//	public ArrayList<Persona> getAll() {

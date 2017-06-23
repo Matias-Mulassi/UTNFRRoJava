@@ -7,18 +7,13 @@ import practica.tarea.Ejercicio05.Entities.*;
 
 public class DataPersona {
 
-	private void mostrarDatosPersona(Persona persona){
-		System.out.println("DNI:" + persona.getDni() + "\n");
-		System.out.println("Apellido:" + persona.getApellido() + "\n");
-		System.out.println("Nombre:" + persona.getNombre() + "\n");
-	}
-	
-	public void getAll(){
-		
+	public ArrayList<Persona> getAll(){
+		Statement stmt=null;
+		ResultSet rs=null;
 		ArrayList<Persona> pers= new ArrayList<Persona>();
 		try{
-			Statement stmt = FactoryConexion.getInstancia().getConn().createStatement();
-			ResultSet rs=stmt.executeQuery("Select * from persona");
+			stmt = FactoryConexion.getInstancia().getConn().createStatement();
+			rs=stmt.executeQuery("Select * from persona");
 			if(rs!=null){
 				while(rs.next()){
 					Persona p=new Persona();
@@ -32,12 +27,58 @@ public class DataPersona {
 		} catch(SQLException e) {
 			e.printStackTrace();			
 		}
-		for(Persona p:pers) {
-			mostrarDatosPersona(p);
+		
+		try {
+			if(rs!=null) rs.close();
+			if(stmt!=null) stmt.close();
+			FactoryConexion.getInstancia().releaseConn();
+		} catch (SQLException e) {
 			
-			
+			e.printStackTrace();
 		}
+		
+		
+		
+		return pers;
+		
+	}
+		
+
+	
+	
+public Persona getByDni(Persona per){
+	Persona p=null;
+	
+	PreparedStatement stmt=null;
+	ResultSet rs=null;
+	try {
+		stmt= FactoryConexion.getInstancia().getConn().prepareStatement(		
+				"select nombre, apellido, dni, habilitado from persona where dni=?");
+		stmt.setString(1, per.getDni());
+		rs = stmt.executeQuery();
+		if(rs!=null && rs.next()){
+			p=new Persona();
+			p.setNombre(rs.getString("nombre"));
+			p.setApellido(rs.getString("apellido"));
+			p.setDni(rs.getString("dni"));
+			p.setHabilitado(rs.getBoolean("habilitado"));
+		}
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
 	}
 	
+	try {
+		if(rs!=null) rs.close();
+		if(stmt!=null) stmt.close();
+		FactoryConexion.getInstancia().releaseConn();
+	} catch (SQLException e) {
+		
+		e.printStackTrace();
+	}
+	return p;
+}
 	
+
+
 }
