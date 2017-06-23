@@ -7,6 +7,26 @@ import practica.tarea.Ejercicio05.Entities.*;
 
 public class DataPersona {
 
+	
+	
+	public void insertRow(Persona p) {
+		DataPersona dataPer= new DataPersona();
+		Statement stmt = null;
+			
+		
+			try {
+				stmt= FactoryConexion.getInstancia().getConn().createStatement();
+				stmt.executeUpdate("Insert into persona (nombre,apellido,dni,habilitado) VALUES ("+p.getNombre()+","+p.getApellido()+","+p.getDni()+","+dataPer.boolToInt(p.isHabilitado())+")");
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}	
+		
+		
+		
+	}
+	
+	
 	public ArrayList<Persona> getAll(){
 		Statement stmt=null;
 		ResultSet rs=null;
@@ -78,7 +98,11 @@ public Persona getByDni(Persona per){
 	}
 	return p;
 }
-	
+int boolToInt( boolean b ){
+	  if ( b )
+	    return 1;
+	  return 0;
 
+}
 
 }

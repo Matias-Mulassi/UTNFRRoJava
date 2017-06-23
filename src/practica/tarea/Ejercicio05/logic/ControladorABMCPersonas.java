@@ -17,6 +17,7 @@ public class ControladorABMCPersonas {
 	}
 	
 	public void crearPersona(Persona p){
+		dataPer.insertRow(p);
 		pers.add(p);
 	}
 	
