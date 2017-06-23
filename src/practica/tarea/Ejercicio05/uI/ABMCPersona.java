@@ -8,31 +8,27 @@ import java.util.Scanner;
 
 public class ABMCPersona {
 	
-	private static ControladorABMCPersonas controller;
+	private ControladorABMCPersonas controller = new ControladorABMCPersonas();
 	private Scanner s;
 
-	public static void main(String[] args) {
-			controller=new ControladorABMCPersonas();
+	public void start() {
+		s = new Scanner(System.in);
 		
-		
-		
-		//		s = new Scanner(System.in);
-//		
-//		String option = "-1";
-//			
-//		while (!option.equals("0")){
-//			System.out.println("Bienvenido al ABMC de Personas");
-//			System.out.println("¿Qué desea hacer?");
-//			System.out.println("1. Dar de alta una nueva persona");
-//			System.out.println("2. Ver los datos de una persona");
-//			System.out.println("3. Modificar los datos de una persona");
-//			System.out.println("4. Eliminar los datos de una persona");
-//			System.out.println("0. Salir");
-//			option = s.nextLine();
-//			clearScreen();
-//			handler(option);
-//		}
-//		s.close();
+		String option = "-1";
+			
+		while (!option.equals("0")){
+			System.out.println("Bienvenido al ABMC de Personas");
+			System.out.println("¿Qué desea hacer?");
+			System.out.println("1. Dar de alta una nueva persona");
+			System.out.println("2. Ver los datos de una persona");
+			System.out.println("3. Modificar los datos de una persona");
+			System.out.println("4. Eliminar los datos de una persona");
+			System.out.println("0. Salir");
+			option = s.nextLine();
+			clearScreen();
+			handler(option);
+		}
+		s.close();
 	}
 	
 	private void handler(String option){

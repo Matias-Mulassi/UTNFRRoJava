@@ -10,9 +10,10 @@ public class ControladorABMCPersonas {
 	
 	public ControladorABMCPersonas(){
 		dataPer= new DataPersona();
-		dataPer.getAll();
-//		pers = new ArrayList<>();
-//		pers.add(new Persona("Matías", "Mulassi", "39787058", true));
+		
+	pers = new ArrayList<Persona>();
+	pers.addAll(dataPer.getAll());
+		pers.add(new Persona("Matías", "Mulassi", "39787058", true));
 	}
 	
 	public void crearPersona(Persona p){
@@ -51,10 +52,10 @@ public Persona getByDni(Persona p)  {
 }
 	
 	
-	//	public ArrayList<Persona> getAll() {
-//		return dataPer.getAll();
-//		
-//	}
+		public ArrayList<Persona> getAll() {
+	return dataPer.getAll();
+	
+}
 	
 	
 	

@@ -17,10 +17,10 @@ public class DataPersona {
 			if(rs!=null){
 				while(rs.next()){
 					Persona p=new Persona();
-					p.setNombre(rs.getString("nombre_persona"));
-					p.setApellido(rs.getString("apellido_persona"));
+					p.setNombre(rs.getString("nombre"));
+					p.setApellido(rs.getString("apellido"));
 					p.setDni(rs.getString("dni"));
-					p.setHabilitado(rs.getBoolean("habilitado_persona"));
+					p.setHabilitado(rs.getBoolean("habilitado"));
 					pers.add(p);
 				}			
 			}
