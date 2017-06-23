@@ -112,7 +112,7 @@ public void add(Persona p) {
 	PreparedStatement stmt=null;
 	try {
 		stmt= FactoryConexion.getInstancia().getConn().prepareStatement(
-		"insert into persona (dni,nombre,apellido,habilitado) values(?,?,?,?) "+
+		"insert into persona (dni,nombre,apellido,habilitado) values(?,?,?,?) ",
 		PreparedStatement.RETURN_GENERATED_KEYS);
 		
 		stmt.setString(1, p.getDni()); // los numeros corresponden a los de ? de la query//

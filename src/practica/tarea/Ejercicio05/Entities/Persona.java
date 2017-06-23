@@ -2,7 +2,7 @@ package practica.tarea.Ejercicio05.Entities;
 
 public class Persona {
 	
-	
+	//
 	private String nombre;
 	private String apellido;
 	private boolean habilitado;

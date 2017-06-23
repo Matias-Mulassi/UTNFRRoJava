@@ -285,7 +285,7 @@ public class AMBCPersona extends JInternalFrame {
 		JOptionPane.showMessageDialog(null,"No existe una persona con ese Dni");
 		
 	}
-	
+	//
 	
 
 	private void mostrarModificada(Persona p) {
