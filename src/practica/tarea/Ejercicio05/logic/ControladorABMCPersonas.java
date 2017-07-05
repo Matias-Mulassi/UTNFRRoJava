@@ -6,14 +6,14 @@ import java.util.ArrayList;
 public class ControladorABMCPersonas {
 	
 	private DataPersona dataPer;
-	private ArrayList<Persona> pers;
+	//private ArrayList<Persona> pers;
 	
 	public ControladorABMCPersonas(){
 		dataPer= new DataPersona();
 		
-	pers = new ArrayList<Persona>();
+	//pers = new ArrayList<Persona>();
 	//pers.addAll(dataPer.getAll());
-		pers.add(new Persona("Matías", "Mulassi", "39787058", true));
+		//pers.add(new Persona("Matías", "Mulassi", "39787058", true));
 	}
 	
 	public void crearPersona(Persona p){
@@ -23,7 +23,7 @@ public class ControladorABMCPersonas {
 	}
 	
 	public boolean existePersona(Persona p){
-		return pers.contains(p);	
+		return dataPer.getAll().contains(p);
 	
 	}
 	
@@ -43,15 +43,18 @@ public class ControladorABMCPersonas {
 	}
 	
 	public void actualizarPersona(Persona p){
-		if (existePersona(p)){
-			borrarPersona(p);
-		}
-		crearPersona(p);
+//		if (existePersona(p)){
+//			borrarPersona(p);
+//		}
+		dataPer.update(p);
 	}
 
 	public void borrarPersona(Persona p){
-		int index = pers.indexOf(p);
-		pers.remove(index);	
+		dataPer.delete(p);
+		
+		
+		//		int index = pers.indexOf(p);
+//		pers.remove(index);	
 	}
 	
 public Persona getByDni(Persona p)  {

@@ -2,6 +2,7 @@ package practica.tarea.Ejercicio05.data;
 
 import java.sql.*;
 import java.util.ArrayList;
+
 import practica.tarea.Ejercicio05.Entities.*;
 
 
@@ -67,15 +68,15 @@ public class DataPersona {
 
 	
 	
-public Persona getByDni(Persona per){
-	Persona p=null;
+	public Persona getByDni(Persona per){
+		Persona p=null;
 	
-	PreparedStatement stmt=null;
-	ResultSet rs=null;
-	try {
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		try {
 		stmt= FactoryConexion.getInstancia().getConn().prepareStatement(		
 				"select id, nombre, apellido, dni, habilitado from persona where dni=?");
-		stmt.setString(1, per.getDni());
+		stmt.setString(1, per.getDni()); 
 		rs = stmt.executeQuery();
 		if(rs!=null && rs.next()){
 			p=new Persona();
@@ -100,16 +101,10 @@ public Persona getByDni(Persona per){
 	}
 	return p;
 }
-int boolToInt( boolean b ){
-	  if ( b )
-	    return 1;
-	  return 0;
 
-}
-
-public void add(Persona p) {
-	ResultSet keyResultSet=null;
-	PreparedStatement stmt=null;
+		public void add(Persona p) {
+			ResultSet keyResultSet=null;
+			PreparedStatement stmt=null;
 	try {
 		stmt= FactoryConexion.getInstancia().getConn().prepareStatement(
 		"insert into persona (dni,nombre,apellido,habilitado) values(?,?,?,?) ",
@@ -121,7 +116,7 @@ public void add(Persona p) {
 		stmt.setBoolean(4, p.isHabilitado());
 		stmt.executeUpdate();
 		stmt.getGeneratedKeys();
-		keyResultSet= stmt.getGeneratedKeys();
+		keyResultSet= stmt.getGeneratedKeys(); //Preguntar que hace?
 		if(keyResultSet!=null && keyResultSet.next()) {
 			
 			p.setId(keyResultSet.getInt(1));
@@ -144,6 +139,57 @@ public void add(Persona p) {
 	}	
 }
 
+		public void delete(Persona p) {
+			PreparedStatement stmt=null;
+			try {
+				stmt=FactoryConexion.getInstancia().getConn()
+						.prepareStatement(
+						"delete from persona where dni=?");
+				stmt.setString(1, p.getDni());
+				stmt.executeUpdate();
+				
+			
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if(stmt!=null)stmt.close();
+				FactoryConexion.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			
+		}
 
-
+		public void update(Persona p) {
+			PreparedStatement stmt=null;
+			try {
+				stmt=FactoryConexion.getInstancia().getConn()
+						.prepareStatement(
+						"update persona set nombre=?, apellido=?, habilitado= ? where dni=?");
+				stmt.setString(1, p.getNombre());
+				stmt.setString(2, p.getApellido());
+				stmt.setBoolean(3, p.isHabilitado());
+				stmt.setString(4, p.getDni());
+				
+				stmt.executeUpdate();
+				
+			
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if(stmt!=null)stmt.close();
+				FactoryConexion.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			
+			
+			
+			
+		}
+		
 }

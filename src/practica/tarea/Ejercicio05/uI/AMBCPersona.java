@@ -311,11 +311,11 @@ public class AMBCPersona extends JInternalFrame {
 		else {	
 			ctrl.borrarPersona(p);
 			if(p.isHabilitado()){
-			JOptionPane.showMessageDialog(null, " Persona Borrada : " +"\n" + "Nombre: "+ p.getNombre() + "\n" + "Apellido" + p.getApellido() +"\n" + "Habilitado: Si"  );
+			JOptionPane.showMessageDialog(null, " Persona Borrada : " +"\n" + "Nombre: "+ p.getNombre() + "\n" + "Apellido: " + p.getApellido() +"\n" + "Habilitado: Si"  );
 			}
 		
 			else {
-				JOptionPane.showMessageDialog(null, " Persona Borrada : " +"\n" + "Nombre: "+ p.getNombre() + "\n" + "Apellido" + p.getApellido() +"\n" + "Habilitado: No"  );
+				JOptionPane.showMessageDialog(null, " Persona Borrada : " +"\n" + "Nombre: "+ p.getNombre() + "\n" + "Apellido: " + p.getApellido() +"\n" + "Habilitado: No"  );
 			}
 				}
 		
