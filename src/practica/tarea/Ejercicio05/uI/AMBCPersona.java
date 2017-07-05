@@ -192,9 +192,9 @@ public class AMBCPersona extends JInternalFrame {
 	}
 
 	protected void buscarClick() {
-		Persona p= new Persona();
-		p.setDni(this.txtDni.getText()); //Aqui pasamos el control grafico//
-		p= ctrl.devuelvePersona(p);
+		Persona p= this.mapearDeForm();
+		//p.setDni(this.txtDni.getText()); //Aqui pasamos el control grafico//
+		p= ctrl.getByDni(p);
 		if (p==null) {
 			dniNoExiste();
 		}
@@ -204,8 +204,8 @@ public class AMBCPersona extends JInternalFrame {
 
 	
 	protected void agregarClick(){
-		Persona p = new Persona();
-		p.setDni(this.txtDni.getText());
+		Persona p = this.mapearDeForm();
+		//p.setDni(this.txtDni.getText());
 		if (ctrl.existePersona(p)){
 			JOptionPane.showMessageDialog(null,"Ya existe una persona con ese Dni");
 		return;
@@ -218,16 +218,15 @@ public class AMBCPersona extends JInternalFrame {
 					}
 	
 	protected void borrarClick() {
-		Persona p= new Persona();
-		p.setDni(this.txtDni.getText());
-		p= ctrl.devuelvePersona(p);
+		Persona p= this.mapearDeForm();
+		//p.setDni(this.txtDni.getText());
+		p= ctrl.getByDni(p);
 		mostrarBorrada(p);
 		
 				
 				}
 				protected void modificarClick(){
-					Persona p = new Persona();
-					p = mapearDeForm();
+					Persona p = this.mapearDeForm();
 					mostrarModificada(p);
 							
 				
