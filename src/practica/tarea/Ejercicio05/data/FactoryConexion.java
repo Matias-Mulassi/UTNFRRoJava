@@ -23,7 +23,7 @@ public class FactoryConexion {
 	}
 	
 	public static FactoryConexion getInstancia(){
-		if (FactoryConexion.instancia == null){		
+		if (FactoryConexion.instancia == null){		//Preguntar donde valida si ya hay conexion//
 			FactoryConexion.instancia=new FactoryConexion();
 		}
 		return FactoryConexion.instancia;

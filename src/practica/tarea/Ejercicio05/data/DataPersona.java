@@ -117,7 +117,7 @@ public class DataPersona {
 		stmt.executeUpdate();
 		stmt.getGeneratedKeys();
 		keyResultSet= stmt.getGeneratedKeys(); //Preguntar que hace?
-		if(keyResultSet!=null && keyResultSet.next()) {
+		if(keyResultSet!=null && keyResultSet.next()) { //preguntar funcionamiento keyResulSet.next()//
 			
 			p.setId(keyResultSet.getInt(1));
 		}

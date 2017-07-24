@@ -212,7 +212,7 @@ public class AMBCPersona extends JInternalFrame {
 		
 			}
 		
-		ctrl.crearPersona(this.mapearDeForm());
+		ctrl.crearPersona(p);
 		JOptionPane.showMessageDialog(null,"Persona agregada Exitosamente");
 		
 					}
