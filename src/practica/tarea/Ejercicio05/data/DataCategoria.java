@@ -29,14 +29,15 @@ public ArrayList<Categoría> getAll() throws Exception{
 			throw e;
 		}
 		
-		try {
-			if(rs!=null) rs.close();
-			if(stmt!=null) stmt.close();
-			FactoryConexion.getInstancia().releaseConn();
-		} catch (SQLException e) {
+			finally {
+					try {
+						if(rs!=null) rs.close();
+						if(stmt!=null) stmt.close();
+						FactoryConexion.getInstancia().releaseConn();
+					} 	catch (SQLException e) {
 			e.printStackTrace();
-		}
-		
+				}
+		}	
 		return cats;
 	}
 }

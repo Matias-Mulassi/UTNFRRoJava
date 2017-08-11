@@ -59,7 +59,7 @@ public class DataPersona {
 			 		throw ade;
 			  		}
 		
-		
+		finally{
 		try {
 			if(rs!=null) rs.close();
 			if(stmt!=null) stmt.close();
@@ -68,7 +68,7 @@ public class DataPersona {
 			
 			e.printStackTrace();
 		}
-		
+		}
 		
 		
 		return pers;
