@@ -1,5 +1,6 @@
 package practica.tarea.Ejercicio05.logic;
 import  practica.tarea.Ejercicio05.data.*;
+import practica.tarea.Ejercicio05.util.AppDataException;
 import practica.tarea.Ejercicio05.Entities.*;
 import java.util.ArrayList;
 //
@@ -17,18 +18,18 @@ public class ControladorABMCPersonas {
 		//pers.add(new Persona("Matías", "Mulassi", "39787058", true));
 	}
 	
-	public void crearPersona(Persona p){
+	public void crearPersona(Persona p)throws Exception{
 		//dataPer.insertRow(p);
 		//pers.add(p);
 		dataPer.add(p);
 	}
 	
-	public boolean existePersona(Persona p){
+	public boolean existePersona(Persona p) throws Exception{
 		return dataPer.getAll().contains(p);
 	
 	}
 	
-	public Persona devuelvePersona(Persona p){
+	public Persona devuelvePersona(Persona p) throws Exception{
 			
 		return dataPer.getByDni(p);
 		
@@ -43,14 +44,14 @@ public class ControladorABMCPersonas {
 //		return null;
 	}
 	
-	public void actualizarPersona(Persona p){
+	public void actualizarPersona(Persona p)throws Exception{
 //		if (existePersona(p)){
 //			borrarPersona(p);
 //		}
 		dataPer.update(p);
 	}
 
-	public void borrarPersona(Persona p){
+	public void borrarPersona(Persona p) throws AppDataException{
 		dataPer.delete(p);
 		
 		
@@ -58,13 +59,13 @@ public class ControladorABMCPersonas {
 //		pers.remove(index);	
 	}
 	
-public Persona getByDni(Persona p) {
+public Persona getByDni(Persona p) throws Exception{
 	return dataPer.getByDni(p);
 	
 }
 	
 	
-		public ArrayList<Persona> getAll(){
+		public ArrayList<Persona> getAll()throws Exception{
 	return dataPer.getAll();
 	
 }

@@ -1,6 +1,8 @@
 package practica.tarea.Ejercicio05.data;
 import java.sql.*;
 
+import practica.tarea.Ejercicio05.util.AppDataException;
+
 
 public class FactoryConexion {
 	
@@ -32,27 +34,27 @@ public class FactoryConexion {
 	
 	private Connection conn;
 	private int cantConn=0;
-	public Connection getConn(){
+	public Connection getConn()throws SQLException,AppDataException{
 		try {
 			if(conn==null || conn.isClosed()){
 				conn = DriverManager.getConnection(
 						"jdbc:mysql://"+host+":"+port+"/"+db+"?user="+user+"&password="+password);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new AppDataException(e, "Error al conectar a la base de datos");
 		}
 		cantConn++;
 		return conn;
 	}
 	
-	public void releaseConn(){
+	public void releaseConn()throws SQLException{
 		try {
 			cantConn--;
 			if (cantConn==0){
 				conn.close();
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		}
 	}
 

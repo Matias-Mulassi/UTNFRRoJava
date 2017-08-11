@@ -50,7 +50,7 @@ public class MainAppWindows {
 	private void initialize() {
 		frmAbmcPersonas = new JFrame();
 		frmAbmcPersonas.setTitle("ABM Java");
-		frmAbmcPersonas.setBounds(100, 100, 641, 428);
+		frmAbmcPersonas.setBounds(100, 100, 641, 529);
 		frmAbmcPersonas.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmAbmcPersonas.getContentPane().setLayout(new BorderLayout(0, 0));
 		

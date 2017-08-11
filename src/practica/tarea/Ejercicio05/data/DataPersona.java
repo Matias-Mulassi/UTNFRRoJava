@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 import practica.tarea.Ejercicio05.Entities.*;
+import practica.tarea.Ejercicio05.util.AppDataException;
 
 
 public class DataPersona {
@@ -28,7 +29,7 @@ public class DataPersona {
 //	}
 	
 	
-	public ArrayList<Persona> getAll(){
+	public ArrayList<Persona> getAll()throws Exception{
 		Statement stmt=null;
 		ResultSet rs=null;
 		ArrayList<Persona> pers= new ArrayList<Persona>();
@@ -51,8 +52,13 @@ public class DataPersona {
 				}			
 			}
 		} catch(SQLException e) {
-			e.printStackTrace();			
+			throw e;
 		}
+		
+		catch (AppDataException ade){
+			 		throw ade;
+			  		}
+		
 		
 		try {
 			if(rs!=null) rs.close();
@@ -72,7 +78,7 @@ public class DataPersona {
 
 	
 	
-	public Persona getByDni(Persona per){
+	public Persona getByDni(Persona per) throws Exception{
 		Persona p=null;
 	
 		PreparedStatement stmt=null;
@@ -95,22 +101,21 @@ public class DataPersona {
 		
 		}
 		
-	} catch (SQLException e) {
-		e.printStackTrace();
-	}
-	
-	try {
-		if(rs!=null) rs.close();
-		if(stmt!=null) stmt.close();
-		FactoryConexion.getInstancia().releaseConn();
-	} catch (SQLException e) {
-		
-		e.printStackTrace();
+		} catch (Exception e) {
+			 			throw e;
+			 	} finally{
+			 			try {
+			 				if(rs!=null)rs.close();
+			 				if(stmt!=null)stmt.close();
+			 				FactoryConexion.getInstancia().releaseConn();
+			 			} catch (SQLException e) {
+			 				throw e;
+			 			}
 	}
 	return p;
 }
 
-		public void add(Persona p) {
+		public void add(Persona p) throws Exception {
 			ResultSet keyResultSet=null;
 			PreparedStatement stmt=null;
 	try {
@@ -131,9 +136,8 @@ public class DataPersona {
 			p.setId(keyResultSet.getInt(1));
 		}
 		
-	} catch (SQLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
+	} catch (SQLException | AppDataException e) {
+		 			throw e;
 	}
 	
 	try {
@@ -148,7 +152,7 @@ public class DataPersona {
 	}	
 }
 
-		public void delete(Persona p) {
+		public void delete(Persona p) throws AppDataException {
 			PreparedStatement stmt=null;
 			try {
 				stmt=FactoryConexion.getInstancia().getConn()
@@ -171,7 +175,7 @@ public class DataPersona {
 			
 		}
 
-		public void update(Persona p) {
+		public void update(Persona p) throws Exception {
 			PreparedStatement stmt=null;
 			try {
 				stmt=FactoryConexion.getInstancia().getConn()

@@ -1,6 +1,7 @@
 package practica.tarea.Ejercicio05.uI;
 //
 import java.awt.EventQueue;
+import javax.swing.JOptionPane;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
@@ -22,6 +23,8 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import practica.tarea.Ejercicio05.logic.*;
+import practica.tarea.Ejercicio05.util.AppDataException;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JFrame;
@@ -227,44 +230,50 @@ public class AMBCPersona extends JInternalFrame {
 	
 	
 	protected void buscarClick() {
-		Persona p= this.mapearDeForm();
 		//p.setDni(this.txtDni.getText()); //Aqui pasamos el control grafico//
-		p= ctrl.getByDni(p);
-		if (p==null) {
-			dniNoExiste();
+		try {
+			this.mapearAForm(ctrl.getByDni(this.mapearDeForm()));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(this,"Error, No existe una persona con ese Dni");
 		}
-		else {
-			mapearAForm(p);}
 	}
-
 	
 	protected void agregarClick(){
-		Persona p = this.mapearDeForm();
 		//p.setDni(this.txtDni.getText());
-		if (ctrl.existePersona(p)){
-			JOptionPane.showMessageDialog(null,"Ya existe una persona con ese Dni");
-		return;
+		try {
+			ctrl.crearPersona(this.mapearDeForm());
+			JOptionPane.showMessageDialog(null,"Persona agregada Exitosamente");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(this,"Error, Ya existe una persona con ese DNI");
+		}
 		
-			}
 		
-		ctrl.crearPersona(p);
-		JOptionPane.showMessageDialog(null,"Persona agregada Exitosamente");
 		
 					}
 	
 	protected void borrarClick() {
-		Persona p= this.mapearDeForm();
 		//p.setDni(this.txtDni.getText());
-		p= ctrl.getByDni(p);
-		mostrarBorrada(p);
+		try {
+			ctrl.borrarPersona(this.mapearDeForm());
+			JOptionPane.showMessageDialog(null,"Persona Borrada Con exito");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(this,"Error, No existe una persona con ese DNI");
+		}
 		
 				
 				}
 				protected void modificarClick(){
-					Persona p = this.mapearDeForm();
-					mostrarModificada(p);
-							
-				
+					try {
+						ctrl.actualizarPersona(this.mapearDeForm());
+						
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						JOptionPane.showMessageDialog(this, e.getMessage());
+					}
+					
 				
 				}
 					
@@ -284,7 +293,6 @@ public class AMBCPersona extends JInternalFrame {
 		this.txtApellido.setText(p.getApellido());
 		this.chckbxHabilitado.setSelected(p.isHabilitado());
 		this.cboCategoria.setSelectedItem(p.getCategoria());
-
 		
 		
 		
@@ -307,57 +315,15 @@ public class AMBCPersona extends JInternalFrame {
 			p.setCategoria((Categoría)this.cboCategoria.getSelectedItem());
 		}
 		return p;
-		
-		
-		
-		
-		
-		
-		
-	}	
-
-	
-	private void dniNoExiste() {
-		
-		JOptionPane.showMessageDialog(null,"No existe una persona con ese Dni");
-		
-	}
-	//
-	
-
-	private void mostrarModificada(Persona p) {
-		
-		if (!ctrl.existePersona(p)){
-			dniNoExiste();
-			return;	
-		}
-		ctrl.actualizarPersona(p);
-		mapearAForm(p);
-		if (p.isHabilitado()){
-		JOptionPane.showMessageDialog(null,"Persona Modificada Con exito" +"\n"+ "Nombre :"+ p.getNombre() + "\n" + "Apellido:  " + p.getApellido() + "\n" + "Dni:" +p.getDni() +"\n" + "Habilitado: Si" );
-		return;
-		}
-		
-		JOptionPane.showMessageDialog(null,"Persona Modificada Con exito" +"\n"+ "Nombre :"+ p.getNombre() + "\n" + "Apellido:  " + p.getApellido() + "\n" + "Dni: " +p.getDni() + "Habilitado: No");
-	}	
-	private void mostrarBorrada(Persona p) {
-		
-		if (p==null) {
-			dniNoExiste();}
 				
-		else {	
-			ctrl.borrarPersona(p);
-			if(p.isHabilitado()){
-			JOptionPane.showMessageDialog(null, " Persona Borrada : " +"\n" + "Nombre: "+ p.getNombre() + "\n" + "Apellido: " + p.getApellido() +"\n" + "Habilitado: Si"  );
-			}
 		
-			else {
-				JOptionPane.showMessageDialog(null, " Persona Borrada : " +"\n" + "Nombre: "+ p.getNombre() + "\n" + "Apellido: " + p.getApellido() +"\n" + "Habilitado: No"  );
-			}
-				}
-		
-	}
+	}	
+
 	
+	
+
+	
+
 	public void showPersona(Persona p){
 		this.mapearAForm(p);
 	}
@@ -365,7 +331,3 @@ public class AMBCPersona extends JInternalFrame {
 
 
 }
-
-
-
-

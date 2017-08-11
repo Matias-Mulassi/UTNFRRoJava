@@ -56,30 +56,32 @@ public class ABMCPersona {
 		
 		System.out.println("Ingrese DNI:");
 		newPersona.setDni(s.nextLine());
-		
-		if (controller.existePersona(newPersona)){
-			System.out.println("Ya existe una persona con ese DNI");
+		System.out.println("Ingrese Nombre");
+		newPersona.setNombre(s.nextLine());
+		System.out.println("Ingrese Apellido");
+		newPersona.setApellido(s.nextLine());
+		System.out.println("¿Está habilitado? (S/N)");
+		String h=s.nextLine();
+		if(h.equalsIgnoreCase("S")){
+			newPersona.setHabilitado(true);
+		}else if (h.equalsIgnoreCase("N")) {
+			newPersona.setHabilitado(false);
 		}
-		else {
-	
-			System.out.println("Ingrese apellido:");
-			newPersona.setApellido(s.nextLine());
+		
+		try {
+			 			controller.crearPersona(newPersona);
+			 		} catch (Exception e) {
+			 			e.printStackTrace();
+			 		}
+		
 			
-			System.out.println("Ingrese nombre:");
-			newPersona.setNombre(s.nextLine());
-			
-			try {
-				 			controller.crearPersona(newPersona);
-				 		} catch (Exception e) {
-				 			e.printStackTrace();
-				 		}
 			
 			
 			System.out.println("Alta exitosa  - Presione Enter para continuar");
 			s.nextLine();
 			clearScreen();
 		}
-	}
+	
 	
 	private void verPersona(){
 		System.out.println("Ver la informacion de una persona");
@@ -88,25 +90,24 @@ public class ABMCPersona {
 		System.out.println("Ingrese DNI:");
 		newPersona.setDni(s.nextLine());
 		
-		
-		if (validarPersona(newPersona)){
-			newPersona = controller.devuelvePersona(newPersona);
-			mostrarDatosPersona(newPersona);
+		try {
+			mostrarDatosPersona(controller.getByDni(newPersona));
 			System.out.println("Presione Enter para continuar");
 			s.nextLine();
 			clearScreen();
+		} catch (Exception e) {
+			e.printStackTrace(); //Agregar mensaje de que hubo un error al buscar a la persona
 		}
 	
-		else { System.out.println("No existe la persona ingresada presione enter para volver al menu anterior");
-		s.nextLine();
-		clearScreen();
+	
 	}
-		}
+		
 	
 	private void mostrarDatosPersona(Persona persona){
 		System.out.println("DNI:" + persona.getDni() + "\n");
 		System.out.println("Apellido:" + persona.getApellido() + "\n");
 		System.out.println("Nombre:" + persona.getNombre() + "\n");
+		mostrarHabilitado(persona);
 	}
 	
 	private void modificarPersona(){
@@ -115,12 +116,17 @@ public class ABMCPersona {
 		
 		System.out.println("Ingrese DNI:");
 		newPersona.setDni(s.nextLine());
-		if (validarPersona(newPersona)){
-			newPersona = controller.devuelvePersona(newPersona);
-			mostrarDatosPersona(newPersona);
+		try {
+			this.mostrarDatosPersona(controller.getByDni(newPersona));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+			System.out.println("\n");
 			System.out.println("¿Que dato desea modificar?");
 			System.out.println("1. Nombre");
 			System.out.println("2. Apellido");
+			System.out.println("3. Habilitación");
+			
 			switch (s.nextLine()) {
 			case "1":
 				System.out.println("Ingrese nuevo nombre");
@@ -129,18 +135,33 @@ public class ABMCPersona {
 			case "2":
 				System.out.println("Ingrese nuevo apellido");
 				newPersona.setApellido(s.nextLine());
+			
+			case "3": {
+				System.out.println("¿Está habilitado? (S/N)");
+				String h=s.nextLine();
+				if(h.equalsIgnoreCase("S")){
+					newPersona.setHabilitado(true);
+				}else if (h.equalsIgnoreCase("N")) {
+					newPersona.setHabilitado(false);
+				}
+			}
 			default:
 				break;
 			}
 			
 			//controller.actualizarPersona(newPersona);
+			try {
+				controller.actualizarPersona(newPersona);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			
 			
 			System.out.println("Modificacion exitosa - Presione Enter para continuar");
 			s.nextLine();
 			clearScreen();
 		}
-	}
+	
 
 	private void bajaPersona(){
 		System.out.println("Dar de baja una persona");
@@ -148,10 +169,13 @@ public class ABMCPersona {
 	
 		System.out.println("Ingrese DNI:");
 		newPersona.setDni(s.nextLine());
-		if (validarPersona(newPersona)){
-			newPersona = controller.devuelvePersona(newPersona);
 			System.out.println("¿Esta seguro que quiere dar de baja la persona con los siguientes datos? [1=Si, 0=No]");
-			mostrarDatosPersona(newPersona);
+			try {
+				mostrarDatosPersona(controller.getByDni(newPersona));
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			
 			if (s.nextLine().equals("1")){
 				try {
@@ -168,21 +192,21 @@ public class ABMCPersona {
 			s.nextLine();
 			clearScreen();
 		}
-	}
 	
-	private boolean validarPersona(Persona p){		
-		if (controller.existePersona(p)){
-			return true;
-		}
-		else{
-			System.out.println("No existe una persona con ese DNI");
-			return false;
-		}
-	}
+	
 	
 	private void clearScreen(){
 		for (int i = 0; i < 50; ++i) System.out.println();
 	}
-
+	public void mostrarHabilitado(Persona p){
+		String h="";
+		if(p.isHabilitado()){
+			h="Habilitado";
+		}else{
+			h="Deshabilitado";
+		}
+		System.out.println(p.getDni()+" - "+p.getApellido()+", "+
+						 p.getNombre()+": "+h);
+	}
 }
 
