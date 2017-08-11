@@ -45,7 +45,7 @@ public class DataPersona {
 					p.setApellido(rs.getString("apellido"));
 					p.setDni(rs.getString("dni"));
 					p.setHabilitado(rs.getBoolean("habilitado"));
-					p.getCategoria().setId(rs.getInt("categoriaId"));
+					p.getCategoria().setId(rs.getInt("idCategoria"));
 					p.getCategoria().setDescripcion(rs.getString("descripcion"));
 					
 					pers.add(p);
@@ -184,8 +184,8 @@ public class DataPersona {
 				stmt.setString(1, p.getNombre());
 				stmt.setString(2, p.getApellido());
 				stmt.setBoolean(3, p.isHabilitado());
-				stmt.setString(4, p.getDni());
-				stmt.setInt(5, p.getCategoria().getId());
+				stmt.setInt(4, p.getCategoria().getId());
+				stmt.setString(5, p.getDni());
 				
 				stmt.executeUpdate();
 				

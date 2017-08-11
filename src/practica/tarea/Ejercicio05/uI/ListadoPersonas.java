@@ -69,9 +69,10 @@ public class ListadoPersonas extends JInternalFrame {
 				}
 		});
 		
-		JButton btnMostrar = new JButton("Mostrar");
+		JButton btnMostrar = new JButton("Refrescar");
 		btnMostrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				listado();
 				initDataBindings();}
 		});
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
@@ -104,43 +105,55 @@ public class ListadoPersonas extends JInternalFrame {
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		getContentPane().setLayout(groupLayout);
+		listado();
+		initDataBindings();
+		
+	}
+
+	private void listado() {
 		try{
 			this.pers=ctrl.getAll();
 		} catch (Exception e){
 			JOptionPane.showMessageDialog(this,e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
 	
 		}
-
-
 		
 	}
 
 	protected void btnEditarClick() {
-		int indexPersona=table.convertRowIndexToModel(table.getSelectedRow());
+		int indexPersona;
+		try {
+			indexPersona = table.convertRowIndexToModel(table.getSelectedRow());
+			
+			AMBCPersona pd= new AMBCPersona();
+			pd.showPersona(this.pers.get(indexPersona));
+			
+			this.getDesktopPane().add(pd);
+			pd.setVisible(true);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(this, "Por favor seleccione una columna");
+		}
 		
-		AMBCPersona pd= new AMBCPersona();
-		pd.showPersona(this.pers.get(indexPersona));
 		
-		this.getDesktopPane().add(pd);
-		pd.setVisible(true);
 		
 	}
+	
 	protected void initDataBindings() {
 		JTableBinding<Persona, List<Persona>, JTable> jTableBinding = SwingBindings.createJTableBinding(UpdateStrategy.READ, pers, table);
 		//
-		BeanProperty<Persona, String> personaBeanProperty = BeanProperty.create("nombre");
-		jTableBinding.addColumnBinding(personaBeanProperty).setColumnName("Nombre").setEditable(false);
+		BeanProperty<Persona, String> personaBeanProperty = BeanProperty.create("dni");
+		jTableBinding.addColumnBinding(personaBeanProperty).setColumnName("DNI");
 		//
-		BeanProperty<Persona, String> personaBeanProperty_1 = BeanProperty.create("apellido");
-		jTableBinding.addColumnBinding(personaBeanProperty_1).setColumnName("Apellido").setEditable(false);
+		BeanProperty<Persona, String> personaBeanProperty_1 = BeanProperty.create("nombre");
+		jTableBinding.addColumnBinding(personaBeanProperty_1).setColumnName("Nombre");
 		//
-		BeanProperty<Persona, String> personaBeanProperty_2 = BeanProperty.create("dni");
-		jTableBinding.addColumnBinding(personaBeanProperty_2).setColumnName("DNI").setEditable(false);
+		BeanProperty<Persona, String> personaBeanProperty_2 = BeanProperty.create("apellido");
+		jTableBinding.addColumnBinding(personaBeanProperty_2).setColumnName("Apellido");
 		//
 		BeanProperty<Persona, String> personaBeanProperty_3 = BeanProperty.create("categoria.descripcion");
-		jTableBinding.addColumnBinding(personaBeanProperty_3).setColumnName("Categoria").setEditable(false);
+		jTableBinding.addColumnBinding(personaBeanProperty_3).setColumnName("Categoria");
 		//
-		jTableBinding.setEditable(false);
 		jTableBinding.bind();
 	}
 }
