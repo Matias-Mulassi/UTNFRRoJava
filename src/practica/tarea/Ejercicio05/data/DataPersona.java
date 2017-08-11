@@ -34,15 +34,19 @@ public class DataPersona {
 		ArrayList<Persona> pers= new ArrayList<Persona>();
 		try{
 			stmt = FactoryConexion.getInstancia().getConn().createStatement();
-			rs=stmt.executeQuery("Select * from persona");
+			rs=stmt.executeQuery("select * from persona p inner join categoria c on p.categoriaId=c.idCategoria");
 			if(rs!=null){
 				while(rs.next()){
 					Persona p=new Persona();
+					p.setCategoria(new Categoría());
 					p.setNombre(rs.getString("id"));
 					p.setNombre(rs.getString("nombre"));
 					p.setApellido(rs.getString("apellido"));
 					p.setDni(rs.getString("dni"));
 					p.setHabilitado(rs.getBoolean("habilitado"));
+					p.getCategoria().setId(rs.getInt("categoriaId"));
+					p.getCategoria().setDescripcion(rs.getString("descripcion"));
+					
 					pers.add(p);
 				}			
 			}
@@ -75,16 +79,20 @@ public class DataPersona {
 		ResultSet rs=null;
 		try {
 		stmt= FactoryConexion.getInstancia().getConn().prepareStatement(		
-				"select id, nombre, apellido, dni, habilitado from persona where dni=?");
+				"select p.id, nombre, apellido, dni, habilitado, categoriaId, descripcion from persona p inner join categoria c on p.categoriaId=c.idCategoria where dni=?");
 		stmt.setString(1, per.getDni()); 
 		rs = stmt.executeQuery();
 		if(rs!=null && rs.next()){
 			p=new Persona();
+			p.setCategoria(new Categoría());
 			p.setId(rs.getInt("id"));
 			p.setNombre(rs.getString("nombre"));
 			p.setApellido(rs.getString("apellido"));
 			p.setDni(rs.getString("dni"));
 			p.setHabilitado(rs.getBoolean("habilitado"));
+			p.getCategoria().setId(rs.getInt("categoriaId"));
+			p.getCategoria().setDescripcion(rs.getString("descripcion"));
+		
 		}
 		
 	} catch (SQLException e) {
@@ -107,13 +115,14 @@ public class DataPersona {
 			PreparedStatement stmt=null;
 	try {
 		stmt= FactoryConexion.getInstancia().getConn().prepareStatement(
-		"insert into persona (dni,nombre,apellido,habilitado) values(?,?,?,?) ",
+		"insert into persona (dni,nombre,apellido,habilitado,categoriaId) values(?,?,?,?,?) ",
 		PreparedStatement.RETURN_GENERATED_KEYS);
 		
 		stmt.setString(1, p.getDni()); // los numeros corresponden a los de ? de la query//
 		stmt.setString(2, p.getNombre());
 		stmt.setString(3, p.getApellido());
 		stmt.setBoolean(4, p.isHabilitado());
+		stmt.setInt(5, p.getCategoria().getId());
 		stmt.executeUpdate();
 		stmt.getGeneratedKeys();
 		keyResultSet= stmt.getGeneratedKeys(); //Preguntar que hace?
@@ -167,11 +176,12 @@ public class DataPersona {
 			try {
 				stmt=FactoryConexion.getInstancia().getConn()
 						.prepareStatement(
-						"update persona set nombre=?, apellido=?, habilitado= ? where dni=?");
+						"update persona set nombre=?, apellido=?, habilitado= ?, categoriaId= ? where dni=?");
 				stmt.setString(1, p.getNombre());
 				stmt.setString(2, p.getApellido());
 				stmt.setBoolean(3, p.isHabilitado());
 				stmt.setString(4, p.getDni());
+				stmt.setInt(5, p.getCategoria().getId());
 				
 				stmt.executeUpdate();
 				

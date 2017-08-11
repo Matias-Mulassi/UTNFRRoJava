@@ -6,8 +6,10 @@ import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import practica.tarea.Ejercicio05.Entities.Categoría;
 import practica.tarea.Ejercicio05.Entities.Persona;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
@@ -23,6 +25,7 @@ import practica.tarea.Ejercicio05.logic.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JFrame;
+import javax.swing.JComboBox;
 public class AMBCPersona extends JInternalFrame {
 
 	private ControladorABMCPersonas ctrl= new ControladorABMCPersonas();
@@ -34,6 +37,7 @@ public class AMBCPersona extends JInternalFrame {
 	private JTextField txtApellido;
 	private JCheckBox chckbxHabilitado;
 	private JTextField textField;
+	private JComboBox cboCategoria;
 
 	/**
 	 * Launch the applicatioN.
@@ -122,6 +126,10 @@ public class AMBCPersona extends JInternalFrame {
 		
 		JLabel lblId = new JLabel("Id");
 		
+		JLabel lblCategoria = new JLabel("Categoria");
+		
+		cboCategoria = new JComboBox();
+		
 		
 		
 		
@@ -136,7 +144,7 @@ public class AMBCPersona extends JInternalFrame {
 							.addComponent(lblApellido)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addComponent(txtApellido, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
 							.addComponent(lblId)
 							.addGap(18)
 							.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
@@ -152,14 +160,22 @@ public class AMBCPersona extends JInternalFrame {
 									.addComponent(txtNombre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 							.addGap(33)
 							.addComponent(btnBuscar))))
-				.addComponent(chckbxHabilitado)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(12)
+					.addContainerGap()
 					.addComponent(btnAgregar)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnBorrar)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(btnModificar))
+					.addComponent(btnModificar)
+					.addContainerGap(125, Short.MAX_VALUE))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addComponent(lblCategoria)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(cboCategoria, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(181, Short.MAX_VALUE))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addComponent(chckbxHabilitado)
+					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -179,18 +195,37 @@ public class AMBCPersona extends JInternalFrame {
 						.addComponent(txtApellido, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblId))
-					.addGap(18)
-					.addComponent(chckbxHabilitado)
-					.addGap(28)
+					.addGap(17)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblCategoria)
+						.addComponent(cboCategoria, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(38)
+					.addComponent(chckbxHabilitado)
+					.addGap(18)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnAgregar)
 						.addComponent(btnBorrar)
-						.addComponent(btnModificar)
-						.addComponent(btnAgregar))
-					.addContainerGap(105, Short.MAX_VALUE))
+						.addComponent(btnModificar))
+					.addContainerGap(58, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
+		cargarListas();
 	}
 
+	private void cargarListas() {
+		
+			try {
+				this.cboCategoria.setModel(new DefaultComboBoxModel(ctrl.getCategorias().toArray()));
+				this.cboCategoria.setSelectedIndex(-1);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+			
+	}
+	
+	
 	protected void buscarClick() {
 		Persona p= this.mapearDeForm();
 		//p.setDni(this.txtDni.getText()); //Aqui pasamos el control grafico//
@@ -248,7 +283,8 @@ public class AMBCPersona extends JInternalFrame {
 		this.txtNombre.setText(p.getNombre());
 		this.txtApellido.setText(p.getApellido());
 		this.chckbxHabilitado.setSelected(p.isHabilitado());
-		
+		this.cboCategoria.setSelectedItem(p.getCategoria());
+
 		
 		
 		
@@ -267,7 +303,9 @@ public class AMBCPersona extends JInternalFrame {
 		p.setApellido(this.txtApellido.getText());
 		p.setApellido(this.txtApellido.getText());
 		p.setHabilitado(this.chckbxHabilitado.isSelected());
-	
+		if (cboCategoria.getSelectedIndex() != -1){
+			p.setCategoria((Categoría)this.cboCategoria.getSelectedItem());
+		}
 		return p;
 		
 		
@@ -320,9 +358,9 @@ public class AMBCPersona extends JInternalFrame {
 		
 	}
 	
-	
-	
-	
+	public void showPersona(Persona p){
+		this.mapearAForm(p);
+	}
 
 
 

@@ -8,6 +8,7 @@ public class Persona {
 	private boolean habilitado;
 	private String dni;
 	private int id;
+	private Categoría categoria;
 	//
 	
 	public boolean equals(Object obj){
@@ -18,6 +19,18 @@ public class Persona {
 	}
 	
 		
+
+	public Categoría getCategoria() {
+		return categoria;
+	}
+
+
+
+	public void setCategoria(Categoría categoria) {
+		this.categoria = categoria;
+	}
+
+
 
 	public int getId() {
 		return id;

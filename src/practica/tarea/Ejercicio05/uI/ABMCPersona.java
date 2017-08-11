@@ -68,7 +68,11 @@ public class ABMCPersona {
 			System.out.println("Ingrese nombre:");
 			newPersona.setNombre(s.nextLine());
 			
-			controller.crearPersona(newPersona);
+			try {
+				 			controller.crearPersona(newPersona);
+				 		} catch (Exception e) {
+				 			e.printStackTrace();
+				 		}
 			
 			
 			System.out.println("Alta exitosa  - Presione Enter para continuar");
@@ -129,7 +133,7 @@ public class ABMCPersona {
 				break;
 			}
 			
-			controller.actualizarPersona(newPersona);
+			//controller.actualizarPersona(newPersona);
 			
 			
 			System.out.println("Modificacion exitosa - Presione Enter para continuar");
@@ -150,7 +154,11 @@ public class ABMCPersona {
 			mostrarDatosPersona(newPersona);
 			
 			if (s.nextLine().equals("1")){
-				controller.borrarPersona(newPersona);
+				try {
+					 			controller.borrarPersona(newPersona);
+					 		} catch (Exception e) {
+					 			e.printStackTrace();
+					 		}
 				
 				System.out.println("Baja exitosa - Presione Enter para continuar");
 			}

@@ -11,6 +11,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 //
 
 public class MainAppWindows {
@@ -55,11 +57,8 @@ public class MainAppWindows {
 		desktopPane = new JDesktopPane();
 		desktopPane.setBackground(Color.WHITE);
 		frmAbmcPersonas.getContentPane().add(desktopPane, BorderLayout.CENTER);
-		desktopPane.setLayout(null);
 		
 		JMenuBar menuBar = new JMenuBar();
-		menuBar.setBounds(0, 0, 97, 21);
-		desktopPane.add(menuBar);
 		
 		JMenu mnPersonas = new JMenu("Personas");
 		menuBar.add(mnPersonas);
@@ -75,8 +74,34 @@ public class MainAppWindows {
 		mnPersonas.add(mntmAbmc);
 		
 		JDesktopPane desktopPane_1 = new JDesktopPane();
-		desktopPane_1.setBounds(287, 157, 1, 1);
-		desktopPane.add(desktopPane_1);
+		GroupLayout gl_desktopPane = new GroupLayout(desktopPane);
+		gl_desktopPane.setHorizontalGroup(
+			gl_desktopPane.createParallelGroup(Alignment.LEADING)
+				.addComponent(menuBar, GroupLayout.PREFERRED_SIZE, 615, GroupLayout.PREFERRED_SIZE)
+				.addGroup(gl_desktopPane.createSequentialGroup()
+					.addGap(287)
+					.addComponent(desktopPane_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+		);
+		gl_desktopPane.setVerticalGroup(
+			gl_desktopPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_desktopPane.createSequentialGroup()
+					.addComponent(menuBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(136)
+					.addComponent(desktopPane_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+		);
+		
+		JMenu mnListadoPersonas = new JMenu("Listado Personas");
+		menuBar.add(mnListadoPersonas);
+		
+		JMenuItem mntmListado = new JMenuItem("Listado");
+		mntmListado.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				showListadoPersonas();
+		
+			}
+		});
+		mnListadoPersonas.add(mntmListado);
+		desktopPane.setLayout(gl_desktopPane);
 	}
 
 
@@ -87,10 +112,13 @@ public class MainAppWindows {
 			frmPer.setVisible(true);
 			
 			
-			
-		}
+			}
+ protected void showListadoPersonas(){
+		ListadoPersonas lp= new ListadoPersonas();
+		desktopPane.add(lp);
+		lp.setVisible(true);
 
-
+ 			}
 
 
 
